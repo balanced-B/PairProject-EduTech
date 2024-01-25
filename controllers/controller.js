@@ -1,7 +1,9 @@
-const category = require("../models/category");
+
 const { User, Profile, Course, Category, sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const { Op } = require("sequelize");
+
+
 
 class Controller {
    static async registerForm(req, res) {
@@ -34,14 +36,20 @@ class Controller {
 
    static async postLogin(req, res) {
       const { email, password } = req.body;
-      console.log(email, password);
+
       try {
          const user = await User.findOne({
             where: { email: email },
          });
 
          if (user) {
-            const validPassword = bcrypt.compareSync(password, hash.password);
+            const validPassword = bcrypt.compareSync(password, user.password);
+            req.session.userId = user.id
+            req.session.email = user.email
+            req.session.role = user.role
+            // console.log(user.email)
+
+
 
             if (validPassword) {
                return res.redirect("/");
@@ -60,7 +68,17 @@ class Controller {
    }
 
    static async profile(req, res) {
+      if(!req.session.email) {
+         res.redirect('/login')
+      }
+
+      
       try {
+        
+         if(!req.session.email) {
+            res.redirect('/login')
+         }
+
          const userProfile = await Profile.findAll();
          res.render("userProfile", { userProfile });
       } catch (error) {
@@ -69,6 +87,10 @@ class Controller {
    }
 
    static async course(req, res) {
+      if(!req.session.email) {
+         res.redirect('/login')
+      }
+
     const { search } = req.query;
     const option = {
         includes: { Category ,}
@@ -95,6 +117,10 @@ class Controller {
   }
 
   static async deleteCourse(req, res) {
+   if(!req.session.email) {
+      res.redirect('/login')
+   }
+
     try {
        let id = req.params.id;
        console.log(id);
@@ -110,6 +136,10 @@ class Controller {
  }
 
  static async editCourse(req, res) {
+   if(!req.session.email) {
+      res.redirect('/login')
+   }
+
     try {
       let id = req.params.id;
       let course = await Course.findByPk(id);
@@ -120,6 +150,10 @@ class Controller {
   }
 
   static async postEditCourse(req, res) {
+   if(!req.session.email) {
+      res.redirect('/login')
+   }
+   
     let{id} = req.params
     try {
       let { name, description, duration} = req.body;
@@ -134,6 +168,11 @@ class Controller {
     } catch (err) {
       res.send(err);
     }
+}
+
+static getLogout(req, res) {
+   delete req.session.email
+   res.redirect('/login')
 }
 
 }

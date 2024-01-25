@@ -4,18 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .field-form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <a href="/">Home</a>
     <h1>Edit Course</h1>
     <form class="field-form" method="post">
-        <label>First Name</label><br>
-        <input type="text" name="name" value="<%=course.name%>"><br><br>
-        <label>Last Name</label><br>
-        <input type="text" name="description" value="<%=course.description%>"><br><br>
-        <label>Date of Birth</label><br>
-        <input type="number" name="duration" value="<%=course.duration%>"><br><br>
+        <label>First Name</label>
+        <input type="text" name="name" value="<%=course.name%>">
+
+        <label>Last Name</label>
+        <input type="text" name="description" value="<%=course.description%>">
+
+        <label>Date of Birth</label>
+        <input type="number" name="duration" value="<%=course.duration%>">
+
         <input type="submit" value="Submit">
     </form>
 </body>
-</html> 
+</html>
