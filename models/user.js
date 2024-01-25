@@ -15,12 +15,23 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.Profile)
     }
+
   }
   User.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
+
+    hooks: {
+      beforeCreate(instance, options) {
+        const salt = bcrypt.genSaltSync(1)
+        const hash = bcrypt.hashSync(instance.password, salt)
+
+        instance.password = hash
+      }
+    },
+
     sequelize,
     modelName: 'User',
   });
