@@ -52,6 +52,10 @@
 </head>
 <body>
     <h1>Please Log In</h1>
+    <h3>Or register<a href="/register"> here</a></h3>
+    <% if(error) { %>
+    <p style="color: red;"><%= error %></p>
+    <% } %>
     <div>
         <form method="post">
             <label>Email</label>

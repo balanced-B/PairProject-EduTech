@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       Course.hasOne(models.Category, { foreignKey: 'CategoryId' });
       Course.belongsTo(models.User, { foreignKey: 'UserId' });
     }
+
+    get getduration(){
+      return `${this.duration} minutes`
+    }
   }
   Course.init({
     name: DataTypes.STRING,

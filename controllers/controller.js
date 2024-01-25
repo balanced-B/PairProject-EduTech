@@ -2,7 +2,7 @@
 const { User, Profile, Course, Category, sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const { Op } = require("sequelize");
-
+const nodemailer = require("nodemailer");//ambil nodemailer
 
 
 class Controller {
@@ -16,6 +16,20 @@ class Controller {
 
    static async registerPost(req, res) {
       try {
+         const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+               user: "yustindelvin",
+               pass: "edap rqsu dxjm llvx",
+            },
+         });
+
+         await transporter.sendMail({
+            from: "yustin.delvin", 
+            to: "n99332681@gmail.com", 
+            subject: "Hello", 
+            text: "Thank you for registering",
+         });
          const { email, password, role } = req.body;
          await User.create({ email, password, role });
          res.redirect("/login");
@@ -27,7 +41,8 @@ class Controller {
 
    static async loginForm(req, res) {
       try {
-         res.render("loginPage");
+         const {error} = req.query
+         res.render("loginPage", {error});
       } catch (error) {
          console.log(error);
          res.send(error);
@@ -49,8 +64,6 @@ class Controller {
             req.session.role = user.role
             // console.log(user.email)
 
-
-
             if (validPassword) {
                return res.redirect("/");
             } else {
@@ -68,18 +81,18 @@ class Controller {
    }
 
    static async profile(req, res) {
-      if(!req.session.email) {
-         res.redirect('/login')
-      }
-
-      
       try {
         
-         if(!req.session.email) {
-            res.redirect('/login')
+         if (!req.session.email) {
+            return res.redirect('/login');
          }
-
+   
          const userProfile = await Profile.findAll();
+   
+         if (!userProfile) {
+            return res.status(404).send('User profile not found');
+         }
+   
          res.render("userProfile", { userProfile });
       } catch (error) {
          res.send(error);
@@ -87,9 +100,6 @@ class Controller {
    }
 
    static async course(req, res) {
-      if(!req.session.email) {
-         res.redirect('/login')
-      }
 
     const { search } = req.query;
     const option = {
@@ -117,9 +127,6 @@ class Controller {
   }
 
   static async deleteCourse(req, res) {
-   if(!req.session.email) {
-      res.redirect('/login')
-   }
 
     try {
        let id = req.params.id;
@@ -136,9 +143,7 @@ class Controller {
  }
 
  static async editCourse(req, res) {
-   if(!req.session.email) {
-      res.redirect('/login')
-   }
+
 
     try {
       let id = req.params.id;
@@ -150,9 +155,6 @@ class Controller {
   }
 
   static async postEditCourse(req, res) {
-   if(!req.session.email) {
-      res.redirect('/login')
-   }
    
     let{id} = req.params
     try {

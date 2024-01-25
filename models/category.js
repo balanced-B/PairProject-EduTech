@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Category.hasMany(models.Course, { foreignKey: 'CategoryId' });
     }
+
   }
   Category.init({
     name: DataTypes.STRING,

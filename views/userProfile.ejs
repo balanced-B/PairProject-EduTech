@@ -18,20 +18,18 @@
             margin: 20px 0;
         }
 
-        input {
+        input, button {
             padding: 8px;
             margin-right: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            cursor: pointer;
         }
 
         button {
-            padding: 8px;
             background-color: #4caf50;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
         }
 
         table {
@@ -52,10 +50,11 @@
     </style>
 </head>
 <body>
-    <form>
-        <input type="text" name="search" placeholder="Search by Title">
-        <button type="submit">Search</button>
+    <form action="/logout" method="post">
+        <button type="submit">Log out</button>
     </form>
+
+    <h3><a href="/course">Course</a></h3>
     <table border="1">
         <tr>
             <th>About me</th>

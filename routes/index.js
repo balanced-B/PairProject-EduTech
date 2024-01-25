@@ -23,31 +23,4 @@ route.post("/course/edit/:id", Controller.postEditCourse)
 
 
 
-// app.get('/userProfile', (req, res) => { // display profile user
-//   res.send('Hello World!')
-// })
-
-// app.get('/courses', (req, res) => { // display courses
-//   res.send('Hello World!')
-// })
-
-// app.get('/categories', (req, res) => { // display categories ***jika mau dan diperlukan
-//   res.send('Hello World!')
-// })
-
-// app.set("view engine", "ejs")
-// app.use(express.urlencoded({extended:false}));
-// const controller = require("./controllers/allContoller");
-
-// app.get("/", controller.profile)
-// app.get("/course", controller.course)
-// app.get("/course/delete/:id", controller.deleteCourse)
-// app.get("/course/edit/:id", controller.editCourse)
-// app.post("/course/edit/:id", controller.postEditCourse)
-
-
-// app.listen(port, () =>{
-//     console.log(`Example app listening on port ${port}`);
-// });
-
 module.exports = route
