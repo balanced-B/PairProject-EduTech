@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const bcrypt = require('bcryptjs')
+const Controller = require('./controllers/allContoller')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended:true}))
@@ -10,21 +11,13 @@ app.get('/', (req, res) => { // langsung redirect ke home/landing page ***bahas 
   res.send('Hello World!')
 })
 
-app.get('/register', (req, res) => { // page untuk daftar user (form)
-  res.send('Hello World!')
-})
+app.get('/register', Controller.registerForm)
 
-app.post('/register', (req, res) => { // redirect untuk log in
-  res.send('Hello World!')
-})
+app.post('/register', Controller.registerPost)
 
-app.get('/login', (req, res) => { // page untuk log in
-  res.send('Hello World!')
-})
+app.get('/login', Controller.loginForm)
 
-app.post('/login', (req, res) => { // redirect landing page/home ***bahas belakangan
-  res.send('Hello World!')
-})
+app.post('/login', Controller.postLogin)
 
 app.get('/userProfile', (req, res) => { // display profile user
   res.send('Hello World!')
