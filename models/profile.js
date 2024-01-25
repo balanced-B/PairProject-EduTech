@@ -17,10 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   Profile.init({
     aboutMe: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
-    dateOfBirth: DataTypes.DATE
+    dateOfBirth: DataTypes.DATE,
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Profile',
   });
-  return Profile;
-};
+}
