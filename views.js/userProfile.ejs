@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Memes</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="search" placeholder="Search by Title">
+        <button type="submit">Search</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>About me</th>
+            <th>imageUrl</th>
+            <th>dateOfBirth</th>
+        </tr>
+        <% userProfile.forEach((el) => { %>
+            <tr>
+                <td><%= el.aboutMe %></td>
+                <td><%= el.imageUrl %></td>
+                <td><%= el.dateOfBirth %></td>
+                <td><%= published(el.createdAt) %></td>
+                <td class="action-links">
+                    <a href="/memes/add">Add</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

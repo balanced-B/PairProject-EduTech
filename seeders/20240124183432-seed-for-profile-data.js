@@ -14,9 +14,10 @@ module.exports = {
      * }], {});
     */
     const profiles = JSON.parse(fs.readFileSync('./data/USER_PROFILE.json', 'utf-8')).map((el) => {
-      el.createdAt = el.updatedAt = new Date()
-      return el
-     })
+      el.createdAt = el.updatedAt = new Date();
+      el.dateOfBirth = new Date(el.dateOfBirth);
+      return el;
+    });
      await queryInterface.bulkInsert('Profiles', profiles)
   },
 

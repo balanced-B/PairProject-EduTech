@@ -1,7 +1,7 @@
 {
   "name": "pairproject-edutech",
   "version": "1.0.0",
-  "description": "",
+  "description": "semua package dasar udah di install, termasuk bcryptjs.\r dan jangan lupa kalo username dan password beda untuk postgres, ganti dulu di config -b",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
