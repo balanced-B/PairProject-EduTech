@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Course</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="search" placeholder="Search by Title">
+        <button type="submit">Search</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        <% course.forEach((el) => { %>
+            <tr>
+                <td><%= el.name %></td>
+                <td><%= el.description %></td>
+                <td><%= el.duration %></td>
+                <td><%= el.CategoryId %></td>
+                <td class="action-links">
+                    <a href="/course/delete/<%= el.id %>">Delete</a>
+                    <a href="/course/edit/<%= el.id %>">Update</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
